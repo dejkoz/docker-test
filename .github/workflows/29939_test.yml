@@ -10,6 +10,7 @@ jobs:
     name: Preverjanje testov
     runs-on: self-hosted
     steps:
+      - uses: actions/checkout@v4
       - name: Ali obstajajo testi
         run: |
           #ls testi/*.sh 2> napaka.txt;
