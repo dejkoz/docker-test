@@ -33,7 +33,7 @@ jobs:
         name: napaka
      - name: Ali je tekom preverjanja nastala napaka
        run: |
-          if [ -s "napaka.txt"]; then
+          if [ -s "napaka.txt" ]; then
             echo "Nastala je napaka... Prekinjam";
             exit 1;
           fi
