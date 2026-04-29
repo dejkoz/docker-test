@@ -1,0 +1,44 @@
+name: Pripravi in zaženi teste
+
+on:
+  push:
+    branches: main
+
+jobs:
+  job_1:
+    name: Preverjanje testov
+    runs-on: self-hosted
+    steps:
+      - name: Ali obstajajo testi
+        run: |
+          ls testi/*.sh 2> napaka.txt;
+          #if ! ls testi/*.sh 2> napaka.txt; then
+          #  echo "Testne skripte ne obstajajo."
+          #fi
+      - name: Shrani napako
+        uses: actions/upload-artifact@v4
+        with:
+           name: napaka
+           path: napaka.txt
+
+  job_2:
+    name: Pripravi teste
+    needs: job_1
+    runs-on: self-hosted
+    steps:
+     - name: Prenesi napako za posel 1
+       uses: actions/download-artifact@v4
+       with:
+        name: napaka
+     - name: Ali je tekom preverjanja nastala napaka
+       run: |
+          if [ -s "napaka.txt"]; then
+            echo "Nastala je napaka... Prekinjam";
+            exit 1;
+          fi
+     - name: Zaženi teste
+       run: |
+         for test in testi/*.sh; do
+             echo "Poganjam $test"
+             bash "$test"
+         done
