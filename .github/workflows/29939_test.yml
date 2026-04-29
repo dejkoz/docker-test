@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: Ali obstajajo testi
         run: |
-          ls testi/*.sh 2> napaka.txt;
-          #if ! ls testi/*.sh 2> napaka.txt; then
-          #  echo "Testne skripte ne obstajajo."
-          #fi
+          #ls testi/*.sh 2> napaka.txt;
+          if ! ls testi/*.sh 2> napaka.txt; then
+            echo "Testne skripte ne obstajajo."
+          fi
       - name: Shrani napako
         uses: actions/upload-artifact@v4
         with:
