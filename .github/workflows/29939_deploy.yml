@@ -1,0 +1,30 @@
+name: 29939_deploy
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+  REPONAME: ${{ secrets.REPO_NAME }}
+on:
+  workflow_run:
+    workflows: ["29939_test"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repozitorija
+        uses: actions/checkout@v4
+      
+      - name: Prijava v Docker
+        run: |
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      
+      - name: Zgradi docker sliko
+        run: |
+          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME
+
+      - name: Potisni docker sliko
+        run: |
+          docker push $DOCKER_USERNAME/$REPONAME
