@@ -3,6 +3,7 @@ name: Pripravi in zaženi teste
 on:
   push:
     branches: main
+  workflow_dispatch:
 
 jobs:
   job_1:
