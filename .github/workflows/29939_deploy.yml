@@ -31,8 +31,8 @@ jobs:
       
       - name: Zgradi docker sliko
         run: |
-          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME
+          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME:latest
 
       - name: Potisni docker sliko
         run: |
-          docker push $DOCKER_USERNAME/$REPONAME
+          docker push $DOCKER_USERNAME/$REPONAME:latest
