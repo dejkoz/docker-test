@@ -10,8 +10,8 @@ jobs:
     name: Preverjanje testov
     strategy:
       matrix:
-        os: [self-hosted]
-    runs-on: ${{ matrix.os }}
+        runner: [self-hosted, ubuntu-latest]
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
       - name: Ali obstajajo testi
