@@ -29,10 +29,7 @@ jobs:
   job_2:
     name: Pripravi teste
     needs: job_1
-    strategy:
-      matrix:
-        runner: [self-hosted, ubuntu-latest]
-    runs-on: ${{ matrix.runner }}
+    runs-on: self-hosted
     steps:
      - name: Prenesi napako za posel 1
        uses: actions/download-artifact@v4
