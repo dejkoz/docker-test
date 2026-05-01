@@ -16,6 +16,14 @@ jobs:
     steps:
       - name: Checkout repozitorija
         uses: actions/checkout@v4
+
+      - name: Ustvari Dockerfile
+        run: |
+          echo "FROM ubuntu:22.04" > Dockerfile
+          echo "WORKDIR /app" >> Dockerfile
+          echo "COPY pripravi_izvajalno_okolje.sh ." >> Dockerfile
+          echo "RUN chmod +x pripravi_izvajalno_okolje.sh" >> Dockerfile
+          echo 'CMD ["bash", "pripravi_izvajalno_okolje.sh"]' >> Dockerfile
       
       - name: Prijava v Docker
         run: |
@@ -23,7 +31,7 @@ jobs:
       
       - name: Zgradi docker sliko
         run: |
-          docker build . --file Dockerfile --tag $DOCKER_USERNAME/$REPONAME
+          docker build -t $DOCKER_USERNAME/$REPONAME .
 
       - name: Potisni docker sliko
         run: |
