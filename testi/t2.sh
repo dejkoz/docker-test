@@ -1,3 +1,3 @@
 #!/bin/bash
-
-echo "test 2"
+echo "Zaganjam 2. test"
+bash ./pripravi_izvajalno_okolje.sh git@github.com:dejkoz/SA.git
